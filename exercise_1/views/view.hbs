@@ -1,41 +1,44 @@
-<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-    <title>App</title>
-    <style>
-
-    </style>
+    <meta charset='utf-8' />
+    <title>App - View Project Page</title>
+    <link rel='stylesheet' href='/main.css' />
   </head>
   <body>
-  {{#with project}}
-    <h1>{{name}}</h1>
-    <div>
-        <a href="/">Back</a>
-        <a href="/edit/{{id}}">Edit</a>
-        <form action="/project/{{id}}" method="post">
-            <input type="hidden" name="_method" value="delete">
-            <input type="submit" value="delete">
-        </form>
-    </div>
     <main>
-        <article>
-            <div class="project__heading">
+      {{#with project}}
+        <header>
+          <h1>{{name}}</h1>
+          <a href='/'>Back</a>
+        </header>
+
+        <div>
+          <a href='/edit/{{id}}'>Edit</a>
+          <form action='/project/{{id}}' method='post'>
+            <input type='hidden' name='_method' value='delete' />
+            <input type='submit' value='delete' />
+          </form>
+        </div>
+        <main>
+          <article>
+            <div class='project__heading'>
 
             </div>
 
-            <div class="project__metadata">
-                <p>Status: {{status}}
-                {{#if dueDate}}
-                    <p>Due by: {{dueDate}}</p>
-                {{/if}}
+            <div class='project__metadata'>
+              Status:
+              {{status}}
+              {{#if dueDate}}
+                <p>Due by: {{dueDate}}</p>
+              {{/if}}
             </div>
 
             {{#if description}}
-                <p>{{description}}</p>
+              <p>{{description}}</p>
             {{/if}}
-        </article>
+          </article>
+        </main>
+      {{/with}}
     </main>
-    {{/with}}
   </body>
 </html>

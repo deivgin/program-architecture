@@ -1,45 +1,25 @@
-<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-    <title>App</title>
-    <style>
-        .project-list {
-            display: flex;
-            flex-direction: column;
-            width: 50%;
-            margin: 0 auto;
-        }
-
-        .project {
-            list-style-type: none;
-            border: 1px solid #000;
-            margin: 10px 0;
-            padding: 10px;
-        }
-
-        .project__heading {
-            display: flex;
-            justify-content: space-between;
-        }
-    </style>
+    <meta charset='utf-8' />
+    <title>App - Projects list</title>
+    <link rel='stylesheet' href='/main.css' />
   </head>
   <body>
-    <h1>Projects</h1>
-    <a href="/create" method>Create Project</a>
     <main>
-        <article>
-        <ul class="project-list">
-            {{#each projects}}
-                <li class="project">
-                    <div class="project__heading">
-                        <h2>{{name}}</h2>
-                        <a href="/view/{{id}}">View</a>
-                    </div>
-                </li>
-            {{/each}}
-        </article>
+      <header>
+        <h1>Projects</h1>
+        <a href='/create' class='button button__primary'>Create Project</a>
+      </header>
+      <article>
+        <ul class='project-list'>
+          {{#each projects}}
+            <li class='project-list__item'>
+              <h2>{{name}}</h2>
+              <a href='/view/{{id}}' class='button'>View</a>
+            </li>
+          {{/each}}
         </ul>
+      </article>
     </main>
   </body>
 </html>
