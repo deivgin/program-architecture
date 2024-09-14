@@ -5,6 +5,9 @@
   --dark: #333;
   --white: #fff;
   --gray: #ccc;
+  --gray-dark: #666;
+  --gray-light: #f4f4f4;
+  --red: #ff0000;
 
   --border-radius: 10px;
 }
@@ -29,21 +32,32 @@ header {
 
 .button {
   color: var(--black);
+  background-color: var(--white);
   border: 2px solid var(--black);
   text-decoration: none;
   padding: 8px 18px;
   border-radius: var(--border-radius);
+  transition: all 0.2s;
+}
+
+.button:hover {
+  cursor: pointer;
 }
 
 .button__primary {
   color: var(--white);
   background-color: var(--black);
-  transition: all 0.2s;
 }
 
 .button__primary:hover {
   background-color: var(--white);
   color: var(--black);
+}
+
+.button__warning {
+  color: var(--white);
+  border-color: var(--red);
+  background-color: var(--red);
 }
 
 .project-list {
@@ -61,4 +75,25 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.project {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.project__toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.project__description {
+  font-size: 14px;
+  border: 2px solid var(--gray-light);
+  border-radius: var(--border-radius);
+  padding: 8px;
+  color: var(--gray);
 }

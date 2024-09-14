@@ -9,35 +9,40 @@
       {{#with project}}
         <header>
           <h1>{{name}}</h1>
-          <a href='/'>Back</a>
+          <a href='/' class='button button__primary'>Back</a>
         </header>
 
-        <div>
-          <a href='/edit/{{id}}'>Edit</a>
-          <form action='/project/{{id}}' method='post'>
-            <input type='hidden' name='_method' value='delete' />
-            <input type='submit' value='delete' />
-          </form>
-        </div>
-        <main>
-          <article>
-            <div class='project__heading'>
+        <article class='project'>
+          <div class='project__metadata'>
+            Status:
+            {{status}}
+            {{#if dueDate}}
+              <p>Due by: {{dueDate}}</p>
+            {{/if}}
+          </div>
 
-            </div>
-
-            <div class='project__metadata'>
-              Status:
-              {{status}}
-              {{#if dueDate}}
-                <p>Due by: {{dueDate}}</p>
-              {{/if}}
-            </div>
-
+          <section class='project__description'>
             {{#if description}}
               <p>{{description}}</p>
+            {{else}}
+              <p>No description available.</p>
             {{/if}}
-          </article>
-        </main>
+          </section>
+
+          <div class='project__toolbar'>
+            <form action='/edit/{{id}}' method='get'>
+              <button class='button' type='submit'>Edit</button>
+            </form>
+            <form action='/project/{{id}}' method='post'>
+              <input type='hidden' name='_method' value='delete' />
+              <button
+                class='button button__warning'
+                type='submit'
+              >Delete</button>
+            </form>
+          </div>
+        </article>
+
       {{/with}}
     </main>
   </body>
