@@ -18,12 +18,6 @@
             padding: 10px;
         }
 
-        .project__metadata {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
         .project__heading {
             display: flex;
             justify-content: space-between;
@@ -40,21 +34,8 @@
                 <li class="project">
                     <div class="project__heading">
                         <h2>{{name}}</h2>
-                        <a href="/edit/{{id}}">Edit</a>
-                        <form action="/project/{{id}}" method="post">
-                            <input type="hidden" name="_method" value="delete">
-                            <input type="submit" value="delete">
-                        </form>
+                        <a href="/view/{{id}}">View</a>
                     </div>
-                    <div class="project__metadata">
-                        <p>Status: {{status}}
-                        {{#if dueDate}}
-                        <p>Due by: {{dueDate}}</p>
-                        {{/if}}
-                    </div>
-                    {{#if description}}
-                        <p>{{description}}</p>
-                    {{/if}}
                 </li>
             {{/each}}
         </article>

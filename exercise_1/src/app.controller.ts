@@ -11,6 +11,12 @@ export class AppController {
     return { projects: this.projectService.findAll() };
   }
 
+  @Get('view/:id')
+  @Render('view')
+  view(@Param('id') id: string) {
+    return { project: this.projectService.findOne(id) };
+  }
+
   @Get('create')
   @Render('create')
   create() {
