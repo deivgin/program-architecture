@@ -10,7 +10,9 @@ export class ProjectService {
     const project: Project = {
       id: Math.random().toString(36).substring(7),
       status: 'open',
-      ...projectDto,
+      name: projectDto.name,
+      description: projectDto.description,
+      dueDate: projectDto.dueDate,
     };
 
     this.projects.push(project);

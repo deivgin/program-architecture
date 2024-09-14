@@ -5,5 +5,5 @@ export interface Project {
   name: string;
   status: ProjectStatus;
   description?: string;
-  dueDate?: Date;
+  dueDate?: string;
 }

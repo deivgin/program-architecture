@@ -1,8 +1,10 @@
-import { ProjectStatus } from '../interface/project.interface';
+import { z } from 'zod';
 
-export class UpdateProjectDto {
-  name: string;
-  status: ProjectStatus;
-  description?: string;
-  dueDate?: Date;
-}
+export const UpdateProjectSchema = z.object({
+  name: z.string().min(1),
+  status: z.enum(['open', 'inProgress', 'done']),
+  description: z.string().optional(),
+  dueDate: z.string().optional(),
+});
+
+export type UpdateProjectDto = z.infer<typeof UpdateProjectSchema>;
