@@ -1,13 +1,25 @@
-import { Controller, Get, Render } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Controller, Get, Render, Param } from '@nestjs/common';
+import { ProjectService } from './project/project.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly projectService: ProjectService) {}
 
   @Get()
   @Render('index')
   root() {
-    return { message: 'Hello World!' };
+    return { projects: this.projectService.findAll() };
+  }
+
+  @Get('create')
+  @Render('create')
+  create() {
+    return {};
+  }
+
+  @Get('edit/:id')
+  @Render('edit')
+  edit(@Param('id') id: string) {
+    return { project: this.projectService.findOne(id) };
   }
 }

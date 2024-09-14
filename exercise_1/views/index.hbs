@@ -3,8 +3,62 @@
   <head>
     <meta charset="utf-8" />
     <title>App</title>
+    <style>
+        .project-list {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+            margin: 0 auto;
+        }
+
+        .project {
+            list-style-type: none;
+            border: 1px solid #000;
+            margin: 10px 0;
+            padding: 10px;
+        }
+
+        .project__metadata {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .project__heading {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
   </head>
   <body>
-    {{ message }}
+    <h1>Projects</h1>
+    <a href="/create" method>Create Project</a>
+    <main>
+        <article>
+        <ul class="project-list">
+            {{#each projects}}
+                <li class="project">
+                    <div class="project__heading">
+                        <h2>{{name}}</h2>
+                        <a href="/edit/{{id}}">Edit</a>
+                        <form action="/project/{{id}}" method="post">
+                            <input type="hidden" name="_method" value="delete">
+                            <input type="submit" value="delete">
+                        </form>
+                    </div>
+                    <div class="project__metadata">
+                        <p>Status: {{status}}
+                        {{#if dueDate}}
+                        <p>Due by: {{dueDate}}</p>
+                        {{/if}}
+                    </div>
+                    {{#if description}}
+                        <p>{{description}}</p>
+                    {{/if}}
+                </li>
+            {{/each}}
+        </article>
+        </ul>
+    </main>
   </body>
 </html>

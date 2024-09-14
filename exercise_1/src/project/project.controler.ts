@@ -7,10 +7,10 @@ import {
   Delete,
   Put,
   HttpCode,
+  Redirect,
 } from '@nestjs/common';
 import { CreateProjectDto } from './dto/createProject.dto';
 import { UpdateProjectDto } from './dto/updateProject.dto';
-import { Project } from './interface/project.interface';
 import { ProjectService } from './project.service';
 
 @Controller('project')
@@ -19,6 +19,7 @@ export class ProjectController {
 
   @Post()
   @HttpCode(204)
+  @Redirect('http://localhost:3000', 301)
   create(@Body() createProjectBody: CreateProjectDto) {
     this.projectService.create(createProjectBody);
   }
@@ -29,19 +30,19 @@ export class ProjectController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string): Project {
-    console.log('id', id);
-    return { id: id, name: `Project ${2}` };
+  findOne(@Param('id') id: string) {
+    return this.projectService.findOne(id);
   }
 
   @Put(':id')
+  @Redirect('http://localhost:3000', 301)
   update(@Param('id') id: string, @Body() updateProjectDto: UpdateProjectDto) {
-    console.log('updateProjectDto', updateProjectDto);
-    return `This action updates a #${id} cat`;
+    this.projectService.update(id, updateProjectDto);
   }
 
   @Delete(':id')
+  @Redirect('http://localhost:3000', 301)
   remove(@Param('id') id: string) {
-    return `This action removes a #${id} project`;
+    this.projectService.delete(id);
   }
 }

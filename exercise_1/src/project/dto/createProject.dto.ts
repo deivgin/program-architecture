@@ -1,3 +1,5 @@
 export class CreateProjectDto {
   name: string;
+  description?: string;
+  dueDate?: Date;
 }
