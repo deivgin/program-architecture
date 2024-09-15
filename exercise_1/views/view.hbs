@@ -21,13 +21,22 @@
             {{/if}}
           </div>
 
-          <section class='project__description'>
-            {{#if description}}
-              <p>{{description}}</p>
-            {{else}}
-              <p>No description available.</p>
-            {{/if}}
-          </section>
+          {{#if description}}
+            <div class='form__input__group'>
+              <textarea
+                name='description'
+                rows='10'
+                readonly
+              >{{description}}</textarea>
+            </div>
+          {{else}}
+            <textarea
+              name='description'
+              placeholder='No description available.'
+              rows='10'
+              readonly
+            ></textarea>
+          {{/if}}
 
           <div class='project__toolbar'>
             <form action='/edit/{{id}}' method='get'>

@@ -8,6 +8,7 @@ export class MethodMiddleware implements NestMiddleware {
       req.method = req.body._method;
       delete req.body._method;
     }
+
     next();
   }
 }

@@ -1,10 +1,33 @@
 import { Injectable } from '@nestjs/common';
 import { Project } from './interface/project.interface';
 import { CreateProjectDto } from './dto/createProject.dto';
+import { UpdateProjectDto } from './dto/updateProject.dto';
 
 @Injectable()
 export class ProjectService {
-  private readonly projects: Array<Project> = [];
+  private readonly projects: Array<Project> = [
+    {
+      id: '1',
+      status: 'open',
+      name: 'Project 1',
+      description: 'Project 1 description',
+      dueDate: new Date().toDateString(),
+    },
+    {
+      id: '2',
+      status: 'open',
+      name: 'Project 2',
+      description: 'Project 2 description',
+      dueDate: new Date().toDateString(),
+    },
+    {
+      id: '3',
+      status: 'open',
+      name: 'Project 3',
+      description: 'Project 3 description',
+      dueDate: new Date().toDateString(),
+    },
+  ];
 
   create(projectDto: CreateProjectDto) {
     const project: Project = {
@@ -26,9 +49,9 @@ export class ProjectService {
     return this.projects.find((project) => project.id === id) ?? null;
   }
 
-  update(id: string, projectDto: CreateProjectDto) {
+  update(projectDto: UpdateProjectDto) {
     const projectIndex = this.projects.findIndex(
-      (project) => project.id === id,
+      (project) => project.id === projectDto.id,
     );
 
     this.projects[projectIndex] = {
