@@ -1,9 +1,8 @@
-# Program Architecture Exercise 1
+# Program Architecture Exercise 2
 
 ## Requirements
 
-- Create MVC, MVU or MVVM architectural pattern driven web site
-- Site should allow creating, editing, viewing and deleting of at least one entity that is the main focus of business aplication (no persistence required)
+- Create Web service as API
+- Demonstrate 1 business entity creation, reading, editing, deleting, use 4 HTTP verbs (no persistence required)
 - Business entity should contain at least 4 editable properties
-- Implement validation for all editable properties in create and update scenarios
-- Demonstrate usage of DI+IOC
+- Unit tests for all API public contracts (100% coverage)
