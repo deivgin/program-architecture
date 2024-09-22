@@ -6,7 +6,6 @@ import {
   Param,
   Delete,
   Put,
-  HttpCode,
   Redirect,
   UsePipes,
   Res,
@@ -16,15 +15,18 @@ import { UpdateProjectDto, UpdateProjectSchema } from './dto/updateProject.dto';
 import { ProjectService } from './project.service';
 import { ZodValidationPipe } from 'src/pipe/validation.pipe';
 import { Response } from 'express';
+import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('project')
 @Controller('project')
 export class ProjectController {
   constructor(private projectService: ProjectService) {}
 
   @Post()
-  @HttpCode(204)
+  @ApiCreatedResponse({
+    description: 'The record has been successfully created.',
+  })
   @UsePipes(new ZodValidationPipe(CreateProjectSchema))
-  @Redirect('http://localhost:3000', 301)
   create(@Body() createProjectBody: CreateProjectDto) {
     this.projectService.create(createProjectBody);
   }
