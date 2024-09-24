@@ -1,11 +1,41 @@
-import { z } from 'zod';
+import { ApiProperty } from '@nestjs/swagger';
+import { ProjectStatus } from '../interface/project.interface';
+import { IsDateString, IsIn, IsNotEmpty, IsOptional } from 'class-validator';
 
-export const UpdateProjectSchema = z.object({
-  id: z.string().min(1),
-  name: z.string().min(1),
-  status: z.enum(['open', 'inProgress', 'done']),
-  description: z.string().optional(),
-  dueDate: z.string().optional(),
-});
+const projectStatus: ProjectStatus[] = ['open', 'inProgress', 'done'];
 
-export type UpdateProjectDto = z.infer<typeof UpdateProjectSchema>;
+export class UpdateProjectDto {
+  @ApiProperty({
+    description: 'The name of the project',
+    example: 'Project 1',
+    required: true,
+  })
+  @IsNotEmpty()
+  name: string;
+
+  @ApiProperty({
+    description: 'The status of the project',
+    example: 'open',
+    required: true,
+  })
+  @IsIn(projectStatus)
+  status: ProjectStatus;
+
+  @ApiProperty({
+    description: 'The description of the project',
+    example: 'Project 1 description',
+    required: false,
+  })
+  @IsNotEmpty()
+  @IsOptional()
+  description: string;
+
+  @ApiProperty({
+    description: 'The due date of the project',
+    example: '2021-08-01',
+    required: false,
+  })
+  @IsDateString()
+  @IsOptional()
+  dueDate: string;
+}

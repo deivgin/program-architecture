@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Project } from './interface/project.interface';
 import { CreateProjectDto } from './dto/createProject.dto';
 import { UpdateProjectDto } from './dto/updateProject.dto';
@@ -46,13 +46,23 @@ export class ProjectService {
   }
 
   findOne(id: string) {
+    const project = this.projects.find((project) => project.id === id);
+
+    if (!project) {
+      throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
+    }
+
     return this.projects.find((project) => project.id === id) ?? null;
   }
 
-  update(projectDto: UpdateProjectDto) {
+  update(id: string, projectDto: UpdateProjectDto) {
     const projectIndex = this.projects.findIndex(
-      (project) => project.id === projectDto.id,
+      (project) => project.id === id,
     );
+
+    if (projectIndex === -1) {
+      throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
+    }
 
     this.projects[projectIndex] = {
       ...this.projects[projectIndex],
@@ -64,6 +74,11 @@ export class ProjectService {
     const projectIndex = this.projects.findIndex(
       (project) => project.id === id,
     );
+
+    if (projectIndex === -1) {
+      throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
+    }
+
     this.projects.splice(projectIndex, 1);
   }
 }
