@@ -39,6 +39,8 @@ export class ProjectService {
     };
 
     this.projects.push(project);
+
+    return project;
   }
 
   findAll() {
@@ -46,12 +48,6 @@ export class ProjectService {
   }
 
   findOne(id: string) {
-    const project = this.projects.find((project) => project.id === id);
-
-    if (!project) {
-      throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
-    }
-
     return this.projects.find((project) => project.id === id) ?? null;
   }
 

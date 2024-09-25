@@ -22,7 +22,7 @@ export class ProjectController {
     description: 'The record has been successfully created.',
   })
   create(@Body() createProjectBody: CreateProjectDto) {
-    this.projectService.create(createProjectBody);
+    return this.projectService.create(createProjectBody);
   }
 
   @Get()
