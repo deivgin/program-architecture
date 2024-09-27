@@ -4,7 +4,9 @@
   "main": "index.js",
   "scripts": {
     "install": "npm run install:ui",
+    "install:server": "cd server && npm install",
     "install:ui": "cd client && npm install",
+    "start:server": "cd server && npm start",
     "start:ui": "cd client && npm run dev"
   },
   "author": "",
