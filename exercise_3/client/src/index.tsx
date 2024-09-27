@@ -9,12 +9,6 @@ const Home = lazy(() => import("./views/home/Home"));
 const Project = lazy(() => import("./views/project/Project"));
 
 const App: ParentComponent = ({ children }) => {
-  const [projects, setProjects] = createSignal<Project[]>([
-    {
-      id,
-    },
-  ]);
-
   return (
     <div class="flex">
       <Sidebar />
