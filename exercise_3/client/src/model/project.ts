@@ -1,8 +1,9 @@
-import { Task } from "solid-js";
+export type ProjectStatus = "open" | "inProgress" | "done";
 
 export type Project = {
-  id: number;
+  id: string;
   name: string;
-  description: string;
-  tasks: Task[];
+  status: ProjectStatus;
+  description?: string;
+  dueDate?: string;
 };
