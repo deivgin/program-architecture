@@ -1,25 +1,53 @@
 import { Match, Show, Switch, type Component } from "solid-js";
-import { Project, type Project as ProjectDetails } from "../../model/project";
+import {
+  Project,
+  ProjectStatus,
+  type Project as ProjectDetails,
+} from "../../model/project";
+
+const statusColors: Record<string, string> = {
+  open: "#d3d3d3", // muted gray
+  inProgress: "#f0e68c", // muted yellow
+  done: "#90ee90", // muted green
+};
+
+const formatStatus = (status: ProjectStatus) => {
+  switch (status) {
+    case "open":
+      return "Open";
+    case "inProgress":
+      return "In Progress";
+    case "done":
+      return "Done";
+    default:
+      return "";
+  }
+};
 
 type Props = {
-  project: Project;
+  status: ProjectStatus;
+  dueDate?: string;
+  description?: string;
 };
 
 const ProjectDetails: Component<Props> = (props) => {
-  const { id, status, dueDate, description } = props.project;
-
   return (
     <>
       <div>
-        Status:
-        {status}
-        <Show when={dueDate}>
-          <p>Due by: {dueDate}</p>
+        <span>Status: </span>
+        <span
+          class="p-1 rounded-sm"
+          style={{ background: statusColors[props.status] }}
+        >
+          {formatStatus(props.status)}
+        </span>
+        <Show when={props.dueDate}>
+          <p>Due by: {props.dueDate}</p>
         </Show>
       </div>
 
       <div>
-        <p>{description}</p>
+        <p>{props.description}</p>
       </div>
     </>
   );

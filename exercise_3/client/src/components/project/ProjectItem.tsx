@@ -2,6 +2,7 @@ import { Component, createSignal, Show } from "solid-js";
 import Button from "../common/Button";
 import ProjectDetails from "./ProjectDetails";
 import { Project } from "../../model/project";
+import { FaSolidAngleDown, FaSolidAngleUp } from "solid-icons/fa";
 
 type Props = {
   project: Project;
@@ -15,14 +16,17 @@ const ProjectItem: Component<Props> = (props) => {
       <div class="flex justify-between align-middle">
         <h2>{props.project.name}</h2>
 
-        <div class="flex gap-2">
-          <Button onClick={() => setShowDetails((prev) => !prev)}>View</Button>
-          <Button type="warning">Delete</Button>
-        </div>
+        <Button border={false} onClick={() => setShowDetails((prev) => !prev)}>
+          {showDetails() ? <FaSolidAngleUp /> : <FaSolidAngleDown />}
+        </Button>
       </div>
 
       <Show when={showDetails()}>
-        <ProjectDetails project={props.project} />
+        <ProjectDetails
+          status={props.project.status}
+          dueDate={props.project.dueDate}
+          description={props.project.description}
+        />
       </Show>
     </div>
   );
