@@ -6,9 +6,9 @@ import {
 } from "../../model/project";
 
 const statusColors: Record<string, string> = {
-  open: "#d3d3d3", // muted gray
-  inProgress: "#f0e68c", // muted yellow
-  done: "#90ee90", // muted green
+  open: "#d3d3d3",
+  inProgress: "#f0e68c",
+  done: "#90ee90",
 };
 
 const formatStatus = (status: ProjectStatus) => {
@@ -24,6 +24,12 @@ const formatStatus = (status: ProjectStatus) => {
   }
 };
 
+const formatDate = (date: string | undefined) => {
+  if (!date) return "";
+
+  return new Date(date).toISOString().split("T")[0];
+};
+
 type Props = {
   status: ProjectStatus;
   dueDate?: string;
@@ -32,24 +38,26 @@ type Props = {
 
 const ProjectDetails: Component<Props> = (props) => {
   return (
-    <>
-      <div>
-        <span>Status: </span>
-        <span
-          class="p-1 rounded-sm"
-          style={{ background: statusColors[props.status] }}
-        >
-          {formatStatus(props.status)}
-        </span>
+    <div class="flex flex-col gap-4">
+      <div class="flex justify-between align-middle">
+        <div>
+          <span>Status: </span>
+          <span
+            class="p-1 rounded-sm"
+            style={{ background: statusColors[props.status] }}
+          >
+            {formatStatus(props.status)}
+          </span>
+        </div>
         <Show when={props.dueDate}>
-          <p>Due by: {props.dueDate}</p>
+          <div>
+            <span>Due by: </span>
+            <span>{formatDate(props.dueDate)}</span>
+          </div>
         </Show>
       </div>
-
-      <div>
-        <p>{props.description}</p>
-      </div>
-    </>
+      <p>{props.description}</p>
+    </div>
   );
 };
 

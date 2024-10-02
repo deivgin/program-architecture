@@ -1,30 +1,30 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { Project } from './interface/project.interface';
-import { CreateProjectDto } from './dto/createProject.dto';
-import { UpdateProjectDto } from './dto/updateProject.dto';
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { Project } from "./interface/project.interface";
+import { CreateProjectDto } from "./dto/createProject.dto";
+import { UpdateProjectDto } from "./dto/updateProject.dto";
 
 @Injectable()
 export class ProjectService {
   private readonly projects: Array<Project> = [
     {
-      id: '1',
-      status: 'open',
-      name: 'Project 1',
-      description: 'Project 1 description',
+      id: "1",
+      status: "open",
+      name: "Project 1",
+      description: "Project 1 description",
       dueDate: new Date().toDateString(),
     },
     {
-      id: '2',
-      status: 'open',
-      name: 'Project 2',
-      description: 'Project 2 description',
+      id: "2",
+      status: "inProgress",
+      name: "Project 2",
+      description: "Project 2 description",
       dueDate: new Date().toDateString(),
     },
     {
-      id: '3',
-      status: 'open',
-      name: 'Project 3',
-      description: 'Project 3 description',
+      id: "3",
+      status: "done",
+      name: "Project 3",
+      description: "Project 3 description",
       dueDate: new Date().toDateString(),
     },
   ];
@@ -32,7 +32,7 @@ export class ProjectService {
   create(projectDto: CreateProjectDto) {
     const project: Project = {
       id: Math.random().toString(36).substring(7),
-      status: 'open',
+      status: "open",
       name: projectDto.name,
       description: projectDto.description,
       dueDate: projectDto.dueDate,
@@ -53,11 +53,11 @@ export class ProjectService {
 
   update(id: string, projectDto: UpdateProjectDto) {
     const projectIndex = this.projects.findIndex(
-      (project) => project.id === id,
+      (project) => project.id === id
     );
 
     if (projectIndex === -1) {
-      throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
+      throw new HttpException("Project not found", HttpStatus.NOT_FOUND);
     }
 
     this.projects[projectIndex] = {
@@ -68,11 +68,11 @@ export class ProjectService {
 
   delete(id: string) {
     const projectIndex = this.projects.findIndex(
-      (project) => project.id === id,
+      (project) => project.id === id
     );
 
     if (projectIndex === -1) {
-      throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
+      throw new HttpException("Project not found", HttpStatus.NOT_FOUND);
     }
 
     this.projects.splice(projectIndex, 1);

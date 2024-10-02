@@ -14,13 +14,14 @@ const Button: Component<Props> = (props) => {
   return (
     <button
       classList={{
-        "rounded-md py-2 px-5": true,
+        "rounded-md py-2 px-3": true,
         "border-2": !border,
         "text-black bg-white border-black hover:bg-gray-light":
           type === "default",
         "text-white bg-black border-black hover:bg-gray-light":
           type === "primary",
-        "text-white bg-red border-white": type === "warning",
+        "text-red bg-white border-white hover:bg-red hover:text-white":
+          type === "warning",
       }}
       onClick={props.onClick}
     >
