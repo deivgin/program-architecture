@@ -18,14 +18,18 @@ const TopNav: Component = () => {
   const pathname = createMemo(() => parsePath(location.pathname));
 
   return (
-    <header>
+    <header class="flex justify-between align-middle py-5">
       <h1>{getHeading(pathname())}</h1>
       <Switch>
         <Match when={!pathname().length}>
-          <A href="/create">Create Project</A>
+          <A class="self-center" href="/create">
+            Create Project
+          </A>
         </Match>
         <Match when={pathname().length}>
-          <A href="/">Back</A>
+          <A class="self-center" href="/">
+            Back
+          </A>
         </Match>
       </Switch>
     </header>

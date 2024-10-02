@@ -24,7 +24,7 @@ const Home: Component = () => {
       <Switch>
         <Match when={projects.error}>{projects.error.message}</Match>
         <Match when={projects()}>
-          <ul class="project-list">
+          <ul class="flex flex-col gap-8 list-none py-8">
             <For each={projects()}>
               {(project) => (
                 <li>
