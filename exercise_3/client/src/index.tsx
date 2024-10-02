@@ -2,16 +2,20 @@ import { lazy, type ParentComponent } from "solid-js";
 import "./index.css";
 import { render } from "solid-js/web";
 import { Route, Router } from "@solidjs/router";
+import TopNav from "./components/TopNav";
 
 const HomePage = lazy(() => import("./views/HomePage"));
-const ProjectPage = lazy(() => import("./views/project/ProjectPage"));
-const CreateProjectPage = lazy(
-  () => import("./views/create/CreateProjectPage")
-);
-const EditProjectPage = lazy(() => import("./views/edit/EditProjectPage"));
+const ProjectPage = lazy(() => import("./components/project/ProjectPage"));
+const CreateProjectPage = lazy(() => import("./views/CreateProjectPage"));
+const EditProjectPage = lazy(() => import("./views/EditProjectPage"));
 
 const App: ParentComponent = ({ children }) => {
-  return <main>{children}</main>;
+  return (
+    <div class="my-0 mx-auto w-[50%]">
+      <TopNav />
+      <main>{children}</main>;
+    </div>
+  );
 };
 
 render(

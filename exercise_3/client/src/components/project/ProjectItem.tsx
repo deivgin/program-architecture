@@ -1,5 +1,5 @@
 import { Component, createSignal, Show } from "solid-js";
-import Button from "../../components/Button";
+import Button from "../common/Button";
 import ProjectDetails from "./ProjectDetails";
 import { Project } from "../../model/project";
 

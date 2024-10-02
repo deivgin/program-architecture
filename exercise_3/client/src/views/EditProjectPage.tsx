@@ -1,5 +1,4 @@
 import { Component, createResource, Show, Suspense } from "solid-js";
-import EditProjectForm from "./EditProjectForm";
 import { A, useParams } from "@solidjs/router";
 
 const fetchProject = async (id: string) => {
@@ -13,18 +12,11 @@ const EditProjectPage: Component = () => {
 
   return (
     <>
-      <header>
-        <h1>Edit</h1>
-        <A href="/" class="button button__primary">
-          Back
-        </A>
-      </header>
-
-      <Suspense fallback={<>Loading...</>}>
+      {/* <Suspense fallback={<>Loading...</>}>
         <Show when={project()}>
           <EditProjectForm project={project()} />
         </Show>
-      </Suspense>
+      </Suspense> */}
     </>
   );
 };

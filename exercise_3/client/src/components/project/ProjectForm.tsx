@@ -5,7 +5,7 @@ type Props = {
   project: Project;
 };
 
-const EditProjectForm: Component<Props> = (props) => {
+const ProjectForm: Component<Props> = (props) => {
   const { id, name, status, description, dueDate } = props.project;
 
   return (
@@ -61,4 +61,4 @@ const EditProjectForm: Component<Props> = (props) => {
   );
 };
 
-export default EditProjectForm;
+export default ProjectForm;

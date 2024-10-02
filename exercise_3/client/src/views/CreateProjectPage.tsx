@@ -3,13 +3,6 @@ import { Component } from "solid-js";
 const CreateProjectPage: Component = () => {
   return (
     <>
-      <header>
-        <h1>Create Project</h1>
-        <a href="/" class="button button__primary">
-          Back
-        </a>
-      </header>
-
       <form action="/project" method="post" class="project">
         <div class="form__input__group">
           <label for="name">
