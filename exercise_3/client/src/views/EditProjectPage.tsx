@@ -5,19 +5,15 @@ import {
   Show,
   Suspense,
 } from "solid-js";
-import { A, useParams } from "@solidjs/router";
+import { useParams } from "@solidjs/router";
 import ProjectForm from "../components/project/ProjectForm";
 import { createStore } from "solid-js/store";
 import { Project } from "../model/project";
-
-const fetchProject = async (id: string) => {
-  const response = await fetch(`http://localhost:3001/project/${id}`);
-  return response.json();
-};
+import { getProject } from "../api/project";
 
 const EditProjectPage: Component = () => {
   const params = useParams();
-  const [project] = createResource(params.id, fetchProject);
+  const [project] = createResource(params.id, getProject);
 
   const [form, setForm] = createStore<Project>({
     id: "",

@@ -1,7 +1,6 @@
-import { Component, createEffect } from "solid-js";
+import { Component } from "solid-js";
 import { Project } from "../../model/project";
-import { createStore } from "solid-js/store";
-import FormField from "../common/formField";
+import FormField from "../common/FormField";
 import Button from "../common/Button";
 
 type Props = {

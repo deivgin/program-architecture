@@ -1,5 +1,5 @@
-import { A, useLocation, useParams } from "@solidjs/router";
-import { Component, createEffect, createMemo, Match, Switch } from "solid-js";
+import { A, useLocation } from "@solidjs/router";
+import { Component, createMemo, Match, Switch } from "solid-js";
 
 const parsePath = (path: string) => {
   return path.split("/").filter((p) => p !== "");

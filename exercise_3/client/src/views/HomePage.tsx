@@ -2,22 +2,16 @@ import {
   createResource,
   For,
   Match,
-  Show,
   Suspense,
   Switch,
   type Component,
 } from "solid-js";
 import ProjectItem from "../components/project/ProjectItem";
 import { Project } from "../model/project";
-import TopNav from "../components/TopNav";
-
-const fetchProjects = async () => {
-  const response = await fetch("http://localhost:3001/project");
-  return response.json();
-};
+import { getProjects } from "../api/project";
 
 const Home: Component = () => {
-  const [projects] = createResource<Project[]>(fetchProjects);
+  const [projects] = createResource<Project[]>(getProjects);
 
   return (
     <Suspense fallback={<div>Loading...</div>}>

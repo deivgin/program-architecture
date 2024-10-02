@@ -1,6 +1,5 @@
-import { Match, Show, Switch, type Component } from "solid-js";
+import { Show, type Component } from "solid-js";
 import {
-  Project,
   ProjectStatus,
   type Project as ProjectDetails,
 } from "../../model/project";
