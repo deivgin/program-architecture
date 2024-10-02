@@ -62,12 +62,6 @@ header {
   padding: 32px 0;
 }
 
-.project {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-
 .project__toolbar {
   display: flex;
   align-items: center;
@@ -81,26 +75,4 @@ header {
   border-radius: var(--border-radius);
   padding: 8px;
   color: var(--gray);
-}
-
-.form__input__group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.form__input__group label {
-  font-weight: bold;
-}
-
-.form__input__group input,
-textarea,
-select {
-  padding: 8px;
-  border-radius: var(--border-radius);
-  border: 2px solid var(--gray);
-}
-
-textarea {
-  resize: none;
 }

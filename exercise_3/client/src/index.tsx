@@ -13,7 +13,7 @@ const App: ParentComponent = ({ children }) => {
   return (
     <div class="my-0 mx-auto w-[50%]">
       <TopNav />
-      <main>{children}</main>;
+      <main>{children}</main>
     </div>
   );
 };

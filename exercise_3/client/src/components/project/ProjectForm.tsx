@@ -1,62 +1,78 @@
-import { Component } from "solid-js";
+import { Component, createEffect } from "solid-js";
 import { Project } from "../../model/project";
+import { createStore } from "solid-js/store";
+import FormField from "../common/formField";
+import Button from "../common/Button";
 
 type Props = {
   project: Project;
+  onFormChange: ({ x }: { [x: string]: string }) => void;
+  onFormSubmit: (e: Event) => void;
 };
 
 const ProjectForm: Component<Props> = (props) => {
-  const { id, name, status, description, dueDate } = props.project;
+  const handleInputChange = (e: Event) => {
+    const target = e.target as HTMLInputElement;
+    const name = target.name;
+    const value = target.value;
+    props.onFormChange({ [name]: value });
+  };
 
   return (
-    <form action="/project/{{id}}" method="post" class="project">
-      <input type="hidden" name="_method" value="put" />
-      <input type="hidden" name="id" value="{{id}}" />
-
-      <div class="form__input__group">
-        <label for="name">
-          Name <span aria-label="required">*</span>
-        </label>
+    <form class="flex flex-col gap-8" onSubmit={props.onFormSubmit}>
+      <FormField for="name" label="Name" required>
         <input
           id="name"
           type="text"
           name="name"
-          value={name}
+          class="p-3 rounded-lg border-gray-light border-2"
+          value={props.project.name}
           placeholder="Project name"
           required
+          onChange={handleInputChange}
         />
-      </div>
+      </FormField>
 
-      <div class="form__input__group">
-        <label for="status">Status</label>
-        <select id="status" name="status" value={status}>
+      <FormField for="status" label="Status" required>
+        <select
+          id="status"
+          name="status"
+          class="p-3 rounded-lg border-gray-light border-2"
+          value={props.project.status}
+          onChange={handleInputChange}
+        >
           <option value="open">Open</option>
           <option value="inProgress">In Progress</option>
           <option value="done">Done</option>
         </select>
-      </div>
+      </FormField>
 
-      <div class="form__input__group">
-        <label for="description">Description</label>
+      <FormField for="description" label="Description">
         <textarea
           id="description"
           name="description"
+          class="p-3 rounded-lg border-gray-light border-2"
+          style={{ resize: "none" }}
           placeholder="Project's description"
           maxlength="500"
           rows="10"
+          onChange={handleInputChange}
         >
-          {description}
+          {props.project.description}
         </textarea>
-      </div>
+      </FormField>
 
-      <div class="form__input__group">
-        <label for="dueDate">Due Date</label>
-        <input type="date" id="dueDate" name="dueDate" value={dueDate} />
-      </div>
+      <FormField for="date" label="Due Date">
+        <input
+          type="date"
+          id="dueDate"
+          name="dueDate"
+          value={props.project.dueDate}
+          onChange={handleInputChange}
+        />
+      </FormField>
 
-      <button class="button button__primary" type="submit">
-        Save
-      </button>
+      <Button type="submit">Save</Button>
     </form>
   );
 };

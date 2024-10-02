@@ -1,44 +1,32 @@
 import { Component } from "solid-js";
+import ProjectForm from "../components/project/ProjectForm";
+import { createStore } from "solid-js/store";
+import { type Project } from "../model/project";
 
 const CreateProjectPage: Component = () => {
+  const [form, setForm] = createStore<Project>({
+    id: "",
+    name: "",
+    status: "open",
+    description: "",
+    dueDate: "",
+  });
+
+  const handleFormChange = (form: { [x: string]: string }) => {
+    setForm(form);
+  };
+
+  const handleFormSubmit = (e: Event) => {
+    e.preventDefault();
+    console.log(form);
+  };
+
   return (
-    <>
-      <form action="/project" method="post" class="project">
-        <div class="form__input__group">
-          <label for="name">
-            Name <span aria-label="required">*</span>
-          </label>
-          <input
-            id="name"
-            type="text"
-            name="name"
-            placeholder="Project name"
-            required
-          />
-        </div>
-
-        <div class="form__input__group">
-          <label for="description">Description</label>
-          <textarea
-            id="description"
-            name="description"
-            placeholder="Project's description"
-            value="{{description}}"
-            maxlength="500"
-            rows="10"
-          ></textarea>
-        </div>
-
-        <div class="form__input__group">
-          <label for="dueDate">Due Date</label>
-          <input type="date" id="dueDate" name="dueDate" value="{{dueDate}}" />
-        </div>
-
-        <button class="button button__primary" type="submit">
-          Save
-        </button>
-      </form>
-    </>
+    <ProjectForm
+      project={form}
+      onFormChange={handleFormChange}
+      onFormSubmit={handleFormSubmit}
+    />
   );
 };
 
