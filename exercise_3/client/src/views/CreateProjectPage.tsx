@@ -2,8 +2,11 @@ import { Component } from "solid-js";
 import ProjectForm from "../components/project/ProjectForm";
 import { createStore } from "solid-js/store";
 import { type Project } from "../model/project";
+import { createProject } from "../api/project";
+import { useNavigate } from "@solidjs/router";
 
 const CreateProjectPage: Component = () => {
+  const navigate = useNavigate();
   const [form, setForm] = createStore<Project>({
     id: "",
     name: "",
@@ -16,9 +19,19 @@ const CreateProjectPage: Component = () => {
     setForm(form);
   };
 
-  const handleFormSubmit = (e: Event) => {
+  const handleFormSubmit = async (e: Event) => {
     e.preventDefault();
-    console.log(form);
+    try {
+      const request = await createProject(form);
+
+      if (!request.ok) {
+        throw new Error("Failed to create project");
+      }
+
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
