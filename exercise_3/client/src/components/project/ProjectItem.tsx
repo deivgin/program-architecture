@@ -8,6 +8,7 @@ import { deleteProject } from "../../api/project";
 
 type Props = {
   project: Project;
+  refetch: () => void;
 };
 
 const ProjectItem: Component<Props> = (props) => {
@@ -22,6 +23,8 @@ const ProjectItem: Component<Props> = (props) => {
       await deleteProject(props.project.id);
     } catch (error) {
       console.error(error);
+    } finally {
+      props.refetch();
     }
   };
 

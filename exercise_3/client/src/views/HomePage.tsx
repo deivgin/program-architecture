@@ -11,7 +11,7 @@ import { Project } from "../model/project";
 import { getProjects } from "../api/project";
 
 const Home: Component = () => {
-  const [projects] = createResource<Project[]>(getProjects);
+  const [projects, { refetch }] = createResource<Project[]>(getProjects);
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
@@ -22,7 +22,7 @@ const Home: Component = () => {
             <For each={projects()}>
               {(project) => (
                 <li>
-                  <ProjectItem project={project} />
+                  <ProjectItem project={project} refetch={refetch} />
                 </li>
               )}
             </For>
