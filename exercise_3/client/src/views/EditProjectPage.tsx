@@ -5,13 +5,14 @@ import {
   Show,
   Suspense,
 } from "solid-js";
-import { useParams } from "@solidjs/router";
+import { useNavigate, useParams } from "@solidjs/router";
 import ProjectForm from "../components/project/ProjectForm";
 import { createStore } from "solid-js/store";
 import { Project } from "../model/project";
-import { getProject } from "../api/project";
+import { getProject, updateProject } from "../api/project";
 
 const EditProjectPage: Component = () => {
+  const navigate = useNavigate();
   const params = useParams();
   const [project] = createResource(params.id, getProject);
 
@@ -33,9 +34,19 @@ const EditProjectPage: Component = () => {
     setForm(form);
   };
 
-  const handleFormSubmit = (e: Event) => {
+  const handleFormSubmit = async (e: Event) => {
     e.preventDefault();
-    console.log(form);
+    try {
+      const request = await updateProject(params.id, form);
+
+      if (!request.ok) {
+        throw new Error("Failed to update project");
+      }
+
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

@@ -21,3 +21,19 @@ export const createProject = async (project: Project) => {
     body: JSON.stringify(project),
   });
 };
+
+export const updateProject = async (id: string, project: Project) => {
+  return await fetch(`${API_URL}/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(project),
+  });
+};
+
+export const deleteProject = async (id: string) => {
+  return await fetch(`${API_URL}/${id}`, {
+    method: "DELETE",
+  });
+};
